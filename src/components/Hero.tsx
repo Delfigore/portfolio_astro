@@ -7,14 +7,14 @@ const Hero: React.FC = () => {
   const animationProps = shouldReduceMotion
     ? {}
     : {
-        initial: { opacity: 0, y: -20 },
-        animate: { opacity: 1, y: 0 },
+        animate: { y: 0 },
         transition: { duration: 0.5 },
       };
 
   return (
     <section className="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-800 text-white py-20">
       <div className="container mx-auto px-4 text-center">
+        
         <motion.h1
           {...animationProps}
           className="text-4xl md:text-6xl font-bold mb-4"
@@ -37,8 +37,7 @@ const Hero: React.FC = () => {
         </motion.p>
         <motion.div
           {...(shouldReduceMotion ? {} : {
-            initial: { opacity: 0, y: 20 },
-            animate: { opacity: 1, y: 0 },
+            animate: { y: 0 },
             transition: { duration: 0.5, delay: 0.6 },
           })}
           className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"

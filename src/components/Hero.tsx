@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
           {...animationProps}
           className="text-4xl md:text-6xl font-bold mb-4"
         >
-          Hi, I'm [Your Name]
+          Hi, I'm Delfigore
         </motion.h1>
         <motion.p
           {...animationProps}

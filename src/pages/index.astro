@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import Projects from '../components/Projects';
+import Skills from '../components/Skills';
+import Contact from '../components/Contact';
+---
+
+<Layout title="Delfigore's portfolio" description="A showcase of my web development projects and skills">
+	<Header client:load />
+	<main class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+		<Hero client:visible />
+		<Projects client:idle />
+		<Skills client:idle />
+		<Contact client:visible />
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 100%;
+		max-width: 1200px;
+		font-size: 16px;
+		line-height: 1.6;
+	}
+</style>

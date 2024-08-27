@@ -1,0 +1,125 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "A portfolio showcasing my web development projects and skills" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Your Name" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://your-portfolio-url.com" />
+		<meta property="og:image" content="https://your-portfolio-url.com/og-image.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content="https://your-portfolio-url.com/og-image.jpg" />
+		<link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<script>
+  // Check for saved theme preference or use system preference
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  })();
+
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  window.localStorage.setItem('theme', theme);
+
+  // Theme toggle functionality
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', newTheme);
+  }
+
+  // Expose the toggleTheme function to the global scope
+  window.toggleTheme = toggleTheme;
+</script>
+
+<style is:global>
+	@font-face {
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 100 900;
+		font-display: swap;
+		src: url('/fonts/inter-var.woff2') format('woff2');
+	}
+
+	:root {
+		--accent: 79, 70, 229;
+		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+	}
+	html {
+		font-family: 'Inter', system-ui, sans-serif;
+		background-color: #F6F6F6;
+		color: #1F2937;
+		transition: background-color 0.3s ease, color 0.3s ease;
+	}
+	html.dark {
+		background-color: #1F2937;
+		color: #F9FAFB;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 700;
+		line-height: 1.2;
+		margin-bottom: 0.5em;
+	}
+	p {
+		line-height: 1.6;
+		margin-bottom: 1em;
+	}
+	a {
+		color: rgb(var(--accent));
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+		background-color: #f1f5f9;
+		padding: 0.2em 0.4em;
+		border-radius: 0.3em;
+		font-size: 0.9em;
+	}
+	html.dark code {
+		background-color: #374151;
+	}
+</style>
